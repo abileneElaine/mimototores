@@ -8,15 +8,17 @@ public class Player : MonoBehaviour
 
 public int velocidade = 10;
 public int forcaPulo = 7;
-private Rigidbody rb;
-
 public bool noChao;
+private Rigidbody rb;
+private AudioSource source;
+public AudioClip clipPulo, clipMoeda;
 
     
     // Start is called before the first frame update
     void Start()
     {
        TryGetComponent(out rb);
+       TryGetComponent(out source);
     }
 
     void OnCollisionEnter(Collision col)
@@ -34,8 +36,11 @@ public bool noChao;
        float v = Input.GetAxis("Vertical"); //-1 para tras, 0 nada, -1 pra frente
        Vector3 direcao = new Vector3(h, 0, v);
        rb.AddForce(direcao * velocidade * Time.deltaTime,ForceMode.Impulse);
-      //pulo
+     
        if(Input.GetKeyDown(KeyCode.Space) && noChao){//se apertou espaço
+      //pulo 
+      source.Play();
+       
         //aplica força para cima
         rb.AddForce(Vector3.up * forcaPulo, ForceMode.Impulse);
         noChao = false;
