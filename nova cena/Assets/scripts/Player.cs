@@ -17,6 +17,7 @@ public AudioClip clipPulo, clipMoeda;
     // Start is called before the first frame update
     void Start()
     {
+       Debug.Log("UPDATE");
        TryGetComponent(out rb);
        TryGetComponent(out source);
     }
